@@ -1,0 +1,8 @@
+<mat-grid-list *ngIf="result !== undefined" cols="5" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let item of result.list">
+    <span>{{item.dt}}</span>
+    <span>{{item.weather[0].main}}</span>
+    <span>{{item.main.temp}}ºC</span>
+    <img src="{{ICON_BASE_URL}}{{item.weather[0].icon}}.png" />
+  </mat-grid-tile>
+</mat-grid-list>

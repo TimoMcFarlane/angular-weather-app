@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+  <span class="filler"></span>
+  <span>Angular Weather</span>
+  <span class="filler"></span>
+  <form>
+    <mat-form-field appearance="legacy">
+      <input name="search" matInput (keyup)="onKey($event)" [(ngModel)]="searchTerm" >
+      <i matSuffix class="material-icons clickable" (click)="onSearch()">search</i>
+    </mat-form-field>
+  </form>
+  <span class="filler"></span>
+</mat-toolbar>
+
+
+

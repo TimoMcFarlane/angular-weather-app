@@ -1,0 +1,17 @@
+<div class="content">
+  <div class="aw-container">
+    <mat-toolbar>
+      <mat-chip-list>
+        <mat-chip *ngFor="let item of searchHistory" [selectable]="true" [removable]="true" (removed)="remove(item)">
+          {{item}}
+          <i class="material-icons" matChipRemove>cancel</i>
+        </mat-chip>
+      </mat-chip-list>
+    </mat-toolbar>
+    <mat-tab-group>
+      <mat-tab label="Weather"><weather [result]="weather"></weather></mat-tab>
+      <mat-tab label="5 Day Forecast"><forecast [result]="forecast"></forecast></mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+
