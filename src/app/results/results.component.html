@@ -1,17 +1,22 @@
-<div class="content">
+<div *ngIf="searchHistory.length > 0" class="content">
   <div class="aw-container">
     <mat-toolbar>
+      <h1 style="font-size:18px;margin-right:10px;">Search History:</h1>
       <mat-chip-list>
-        <mat-chip *ngFor="let item of searchHistory" [selectable]="true" [removable]="true" (removed)="remove(item)">
+        <mat-chip *ngFor="let item of searchHistory" (click)="search(item)" [selectable]="true" [removable]="true" (removed)="remove(item)">
           {{item}}
-          <i class="material-icons" matChipRemove>cancel</i>
+          <i class="material-icons" style="line-height:0.8;margin-left:4px;padding:2px;" matChipRemove>cancel</i>
         </mat-chip>
       </mat-chip-list>
     </mat-toolbar>
-    <mat-tab-group>
-      <mat-tab label="Weather"><weather [result]="weather"></weather></mat-tab>
-      <mat-tab label="5 Day Forecast"><forecast [result]="forecast"></forecast></mat-tab>
+    <mat-tab-group *ngIf="weather && forecast && !error">
+      <mat-tab label="Weather ({{weather.name}})"><weather [result]="weather"></weather></mat-tab>
+      <mat-tab label="5 Day Forecast ({{weather.name}})"><forecast [result]="forecast"></forecast></mat-tab>
     </mat-tab-group>
+    <div *ngIf="error">
+      <h1>An error occured..</h1>
+      <p>Please make sure that the given city name is spelt correctly!</p>
+    </div>
   </div>
 </div>
 

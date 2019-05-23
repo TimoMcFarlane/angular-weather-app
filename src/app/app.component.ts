@@ -12,6 +12,8 @@ export class AppComponent {
   forecast: Upcoming;
   searchHistory: string[];
   loading: boolean;
+  error: boolean;
+  activeSearch: string;
 
   constructor(private api: ApiService) {
     this.searchHistory = [];
@@ -23,14 +25,33 @@ export class AppComponent {
         return history;
       }
     })
+    this.weather = null;
+    this.forecast = null;
   }
-
+  // TODO: Add error callback to API requests
   submitSearch(searchTerm: string) {
     this.loading = true;
-    this.searchHistory.push(searchTerm);
+    this.error = false;
+    this.activeSearch = searchTerm;
+    // TODO: Add check for existing searchTerm
+      // IF it exists -> Dont add it again
+      if(!this.searchHistory.contains(searchTerm)) {
+        this.searchHistory.push(searchTerm);
+      }
+    
     this.api.fetchWeather(searchTerm, (response) => {
+      if(response.hasOwnProperty('error')) {
+        this.error = true;
+        this.loading = false;
+        return;
+      }
       this.weather = response;
       this.api.fetchForecast(searchTerm, (response) => {
+        if(response.hasOwnProperty('error')) {
+          this.error = true;
+          this.loading = false;
+          return;
+        }
         this.forecast = response;
         this.loading = false;
       });

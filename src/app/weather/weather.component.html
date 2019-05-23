@@ -1,8 +1,7 @@
-<mat-card *ngIf="result !== undefined">
-  <p>{{result.name}}</p>
+<mat-card *ngIf="result !== undefined && result !== null">
   <p>{{result.weather[0].main}}</p>
-  <p>{{result.main.temp}}</p>
-  <p>{{result.dt}}</p>
+  <p>{{result.main.temp}} ºC</p>
+  <p>{{convertDt(result.dt)}}</p>
   <img src="{{ICON_BASE_URL}}{{result.weather[0].icon}}.png" />
 </mat-card>
 

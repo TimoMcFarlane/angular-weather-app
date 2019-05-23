@@ -1,4 +1,4 @@
 <navigation (submitSearch)="submitSearch($event)"></navigation>
-<results (removeSearchItem)="removeSearchItem($event)" [searchHistory]="searchHistory" [weather]="weather" [forecast]="forecast"></results>
+<results [error]="error" (submitSearch)="submitSearch($event)" (removeSearchItem)="removeSearchItem($event)" [searchHistory]="searchHistory" [weather]="weather" [forecast]="forecast"></results>
 <div class="loader-backdrop" *ngIf="loading"><mat-spinner></mat-spinner></div>
 <router-outlet></router-outlet>
