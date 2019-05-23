@@ -34,7 +34,7 @@ export class AppComponent {
       this.error = false;
       this.activeSearch = searchTerm;
       
-      if(!this.searchHistory.contains(searchTerm)) {
+      if(!(this.searchHistory.indexOf(searchTerm) > -1)) {
         this.searchHistory.push(searchTerm);
       }
       
