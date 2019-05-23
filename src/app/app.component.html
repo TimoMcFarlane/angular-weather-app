@@ -1,12 +1,14 @@
 <navigation (submitSearch)="submitSearch($event)"></navigation>
-<div *ngIf="!weather && !forecast" class="aw-container">
-  <h1>Welcome to Angular Weather</h1>
-  <p>You can start by using the search bar provided above.</p>
-  <ol>
-    <li>Enter a city name of your choosing</li>
-    <li>Click the search icon or hit enter</li>
-  </ol>
-</div>
+<div *ngIf="!weather && !forecast" class="content">
+  <div class="aw-container">
+      <h1>Welcome to Angular Weather</h1>
+      <p>You can start by using the search bar provided above.</p>
+      <ol>
+        <li>Enter a city name of your choosing</li>
+        <li>Click the search icon or hit enter</li>
+      </ol>
+    </div>
+  </div>
 <results [error]="error" (submitSearch)="submitSearch($event)" (removeSearchItem)="removeSearchItem($event)" [searchHistory]="searchHistory" [weather]="weather" [forecast]="forecast"></results>
 <div class="loader-backdrop" *ngIf="loading"><mat-spinner></mat-spinner></div>
 <router-outlet></router-outlet>
