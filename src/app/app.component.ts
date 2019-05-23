@@ -28,33 +28,33 @@ export class AppComponent {
     this.weather = null;
     this.forecast = null;
   }
-  // TODO: Add error callback to API requests
   submitSearch(searchTerm: string) {
-    this.loading = true;
-    this.error = false;
-    this.activeSearch = searchTerm;
-    // TODO: Add check for existing searchTerm
-      // IF it exists -> Dont add it again
+    if(searchTerm !== this.activeSearch) {
+      this.loading = true;
+      this.error = false;
+      this.activeSearch = searchTerm;
+      
       if(!this.searchHistory.contains(searchTerm)) {
         this.searchHistory.push(searchTerm);
       }
-    
-    this.api.fetchWeather(searchTerm, (response) => {
-      if(response.hasOwnProperty('error')) {
-        this.error = true;
-        this.loading = false;
-        return;
-      }
-      this.weather = response;
-      this.api.fetchForecast(searchTerm, (response) => {
+      
+      this.api.fetchWeather(searchTerm, (response) => {
         if(response.hasOwnProperty('error')) {
           this.error = true;
           this.loading = false;
           return;
         }
-        this.forecast = response;
-        this.loading = false;
+        this.weather = response;
+        this.api.fetchForecast(searchTerm, (response) => {
+          if(response.hasOwnProperty('error')) {
+            this.error = true;
+            this.loading = false;
+            return;
+          }
+          this.forecast = response;
+          this.loading = false;
+        });
       });
-    });
+    }
   }
 }
